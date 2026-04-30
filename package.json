@@ -1,9 +1,27 @@
 {
+  "name": "nopcommerce",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Prabuavi30/Team1_nopCommerce#readme",
+  "bugs": {
+    "url": "https://github.com/Prabuavi30/Team1_nopCommerce/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prabuavi30/Team1_nopCommerce.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "playwright.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {},
   "devDependencies": {
     "@cucumber/cucumber": "^12.8.2",
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",
     "playwright-bdd": "^7.0.0"
-  },
-  "scripts": {}
+  }
 }
