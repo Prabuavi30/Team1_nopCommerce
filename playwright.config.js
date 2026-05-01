@@ -1,6 +1,5 @@
 // @ts-check
-import { defineConfig, devices } from "@playwright/test";
-
+const { defineConfig, devices } = require("@playwright/test");
 const { defineBddConfig } = require("playwright-bdd");
 
 const testDir = defineBddConfig({
@@ -9,18 +8,12 @@ const testDir = defineBddConfig({
 });
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
  * @see https://playwright.dev/docs/test-configuration
  */
-export default defineConfig({
+module.exports = defineConfig({
   testDir,
+  /* Increase timeout for E2E tests (multiple page navigations on remote site) */
+  timeout: 120000,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -34,7 +27,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: "https://demo.nopcommerce.com",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
@@ -44,7 +37,14 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        channel: "chrome",
+        headless: false,
+        launchOptions: {
+          args: ["--disable-blink-features=AutomationControlled"],
+        },
+      },
     },
 
     {
